@@ -36,7 +36,7 @@ class StrictMrsMitt<T extends EventMap> {
   }
 
   on<K extends keyof T>(eventKey: K, handler: Unpacked<T[K]>): void {
-    if (!((eventKey as string) in this.handlers)) {
+    if (!(eventKey in this.handlers)) {
       this.handlers[eventKey] = [];
     }
     if (Array.isArray(this.handlers[eventKey])) {
@@ -44,7 +44,7 @@ class StrictMrsMitt<T extends EventMap> {
     }
   }
   once<K extends keyof T>(eventKey: K, handler: Unpacked<T[K]>): void {
-    if (!((eventKey as string) in this.onceHandlers)) {
+    if (!(eventKey in this.onceHandlers)) {
       this.onceHandlers[eventKey] = [];
     }
     if (Array.isArray(this.onceHandlers[eventKey])) {
