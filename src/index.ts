@@ -17,12 +17,13 @@ class StrictMrsMitt<T extends EventMap> {
     eventKey: K,
     ...fnArgs: K extends NonVoidKeys<T> ? Parameters<T[K]> : never
   ): void {
-    if (eventKey in this.onceHandlers) {
+    if (
+      eventKey in this.onceHandlers &&
+      this.onceHandlers[eventKey].length > 0
+    ) {
       this.onceHandlers[eventKey].forEach(listeningHandler => {
-        if (listeningHandler) {
-          listeningHandler(...fnArgs);
-          this.off(eventKey, listeningHandler);
-        }
+        listeningHandler(...fnArgs);
+        this.off(eventKey, listeningHandler);
       });
     }
 
