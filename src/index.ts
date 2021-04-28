@@ -1,10 +1,13 @@
 type EventMap = Record<string, any>;
+
 type NonVoidKeys<T extends EventMap> = {
   [K in keyof T]: T[K] extends (arg: void) => void ? never : K;
 }[keyof T];
+
 type Unpacked<T> = T extends (infer U)[] ? U : T;
 
 type Handlers<T> = { [K in keyof T]: T[K][] };
+
 class StrictMrsMitt<T extends EventMap> {
   private handlers: Handlers<T>;
   private onceHandlers: Handlers<T>;
