@@ -27,11 +27,9 @@ class StrictMrsMitt<T extends EventMap> {
       });
     }
 
-    if (eventKey in this.handlers) {
+    if (eventKey in this.handlers && this.handlers[eventKey].length > 0) {
       this.handlers[eventKey].forEach(listeningHandler => {
-        if (listeningHandler) {
-          listeningHandler(...fnArgs);
-        }
+        listeningHandler(...fnArgs);
       });
     }
   }
