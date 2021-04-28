@@ -54,12 +54,12 @@ class StrictMrsMitt<T extends EventMap> {
   off<K extends keyof T>(eventKey: K, handler: Unpacked<T[K]>) {
     if (eventKey in this.handlers) {
       this.handlers[eventKey] = this.handlers[eventKey].filter(
-        (listeningHandler: any) => listeningHandler !== handler
+        listeningHandler => listeningHandler !== handler
       );
     }
     if (eventKey in this.onceHandlers) {
       this.onceHandlers[eventKey] = this.onceHandlers[eventKey].filter(
-        (listeningHandler: any) => listeningHandler !== handler
+        listeningHandler => listeningHandler !== handler
       );
     }
   }
